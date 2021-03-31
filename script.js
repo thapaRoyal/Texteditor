@@ -9,12 +9,12 @@
  * Update the output text as a user types in the textarea
  * HINT: Use the onkeydown function inside HTML
  */
-function updateText() {
+updateText = () => {
   // CODE GOES HERE
   //   console.log("working");
   let text = document.getElementById("text-input").value;
   document.getElementById("text-output").innerText = text;
-}
+};
 
 /**
  * Toggle the bold class for the output text
@@ -23,20 +23,20 @@ function updateText() {
  * HINT: Use the classList property
  * HINT: Toggle .active class for the button
  */
-function makeBold(elem) {
+makeBold = (elem) => {
   //CODE GOES HERE
   // console.log(elem);
   elem.classList.toggle("active");
   document.getElementById("text-output").classList.toggle("bold");
-}
+};
 
 /**
  * Toggle the italic class for the output text
  */
-function makeItalic(elem) {
+makeItalic = (elem) => {
   elem.classList.toggle("active");
   document.getElementById("text-output").classList.toggle("italic");
-}
+};
 
 /**
  * Toggle the underline class for the output text
@@ -44,7 +44,7 @@ function makeItalic(elem) {
  * HINT: Use the classList property
  * HINT: Use contains, remove, and add functions
  */
-function makeUnderline(elem) {
+makeUnderline = (elem) => {
   //CODE GOES HERE0
   elem.classList.toggle("active");
   let formattedText = document.getElementById("text-output");
@@ -53,7 +53,7 @@ function makeUnderline(elem) {
   } else {
     formattedText.classList.add("underline");
   }
-}
+};
 
 /**
  * Toggle the style textAlign attribute
@@ -61,14 +61,59 @@ function makeUnderline(elem) {
  * HINT: Use the style property of the element
  * HINT: Make sure to untoggle the active state for all other align buttons
  */
-function alignText(elem, alignType) {
+alignText = (elem, alignType) => {
   // CODE GOES HERE
   elem.classList.toggle("active");
   //   console.log(alignType);
   document.getElementById("text-output").style.textAlign = alignType;
-  let buttonsList = document.getElementsByClassName("align");
-  for (let i = 0; i < buttonsList.length; i++) {
-    buttonsList[i].classList.remove("active");
+  let alignButtons = document.getElementsByClassName("align");
+  for (let button of alignButtons) {
+    button.classList.remove("active");
   }
+  // alignButtons.map((button) => {
+  // button.classList.remove("active");
+  // });
+  // for (let i = 0; i < buttonsList.length; i++) {
+  //   buttonsList[i].classList.remove("active");
+  // }
   elem.classList.add("active");
-}
+};
+
+// PROMISES //
+/*
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    // resolve({
+    // firstName: "royal",
+    // lastName: "thapa",
+    reject("something went wrong");
+  });
+}, 1000);
+
+promise
+  .then((Response) => {
+    console.table("here is the response after 1 s: ");
+    console.table(Response);
+  })
+  .catch((error) => {
+    console.table(error);
+  });
+console.table("this is part 1");
+*/
+
+// FETCH DATA FROM API
+
+let userPromise = fetch("https://randomuser.me/api");
+console.log(userPromise);
+userPromise
+  .then((response) => {
+    return response.json();
+  })
+  .then((resData) => {
+    console.log(resData.results[0].name.first);
+    console.log(resData.results[0].name.last);
+  })
+  .catch((error) => {
+    console.log("error");
+    console.log(error);
+  });
